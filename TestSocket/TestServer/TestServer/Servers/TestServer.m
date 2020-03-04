@@ -104,27 +104,29 @@
     SERVER_LOG("Server start......\n");
     //为了避免线程终止，需要一直run
     while (!_isClosed && _server_socket_fd != -1) {
-        //定义客户端的socket地址结构client_addr
-        struct sockaddr_in client_addr;
-        socklen_t length = sizeof(client_addr);
+        @autoreleasepool {
+            //定义客户端的socket地址结构client_addr
+            struct sockaddr_in client_addr;
+            socklen_t length = sizeof(client_addr);
 
-        //接受一个到server_socket代表的socket的一个连接
-        //如果没有连接请求,就会阻塞在这里等待第一个连接到来
-        //accept函数返回一个新的socket,这个new_server_socket即连接的客户端socket
-        int new_client_socket = accept(_server_socket_fd, (struct sockaddr *)&client_addr, &length);
-        if (new_client_socket < 0) {
-            SERVER_LOG("Server Accept Failed, errno: %s!\n", strerror(errno));
-            break;
+            //接受一个到server_socket代表的socket的一个连接
+            //如果没有连接请求,就会阻塞在这里等待第一个连接到来
+            //accept函数返回一个新的socket,这个new_server_socket即连接的客户端socket
+            int new_client_socket = accept(_server_socket_fd, (struct sockaddr *)&client_addr, &length);
+            if (new_client_socket < 0) {
+                SERVER_LOG("Server Accept Failed, errno: %s!\n", strerror(errno));
+                break;
+            }
+            [_connectedClients addObject:@(new_client_socket)];
+            if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didUpdateConnectedClients:)]) {
+                [self.delegtate server:self didUpdateConnectedClients:_connectedClients.copy];
+            }
+            SERVER_LOG(" one client connted: %d\n", new_client_socket);
+            //单个socket的通信应该放在自己的线程中
+            [NSThread detachNewThreadSelector:@selector(readData:)
+                                     toTarget:self
+                                   withObject:[NSNumber numberWithInt:new_client_socket]];
         }
-        [_connectedClients addObject:@(new_client_socket)];
-        if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didUpdateConnectedClients:)]) {
-            [self.delegtate server:self didUpdateConnectedClients:_connectedClients.copy];
-        }
-        SERVER_LOG(" one client connted: %d\n", new_client_socket);
-        //单个socket的通信应该放在自己的线程中
-        [NSThread detachNewThreadSelector:@selector(readData:)
-                                 toTarget:self
-                               withObject:[NSNumber numberWithInt:new_client_socket]];
     }
     //走到这里说明需要关闭监听用的socket
     close(_server_socket_fd);
@@ -138,20 +140,22 @@
 
     //这里我们规定当客户端发来"-"时表示需要终止连接
     while (buffer[0] != '-' && _server_socket_fd != -1 && [_connectedClients containsObject:clientSocket]) {
-        bzero(buffer, MAX_BUFFER_SIZE);
-        //接收客户端发送来的信息到buffer中
-        size_t recv_length = recv(intSocket, buffer, MAX_BUFFER_SIZE, 0);
-        SERVER_LOG("recv length : %ld\n", recv_length);
-        if (recv_length > 0) {
-            SERVER_LOG("client:%s\n", buffer);
-            if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didReceiveBuffer:length:socket:)]) {
-                [self.delegtate server:self didReceiveBuffer:buffer length:(int)recv_length socket:clientSocket.intValue];
-            }
-        } else if (recv_length == 0) {
-            SERVER_LOG("Client disconnected\n");
-            [self closeClient:clientSocket];
-        } else {
-            SERVER_LOG("receive data error: %s\n", strerror(errno));
+        @autoreleasepool {
+            bzero(buffer, MAX_BUFFER_SIZE);
+                   //接收客户端发送来的信息到buffer中
+                   size_t recv_length = recv(intSocket, buffer, MAX_BUFFER_SIZE, 0);
+                   SERVER_LOG("recv length : %ld\n", recv_length);
+                   if (recv_length > 0) {
+                       SERVER_LOG("client:%s\n", buffer);
+                       if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didReceiveBuffer:length:socket:)]) {
+                           [self.delegtate server:self didReceiveBuffer:buffer length:(int)recv_length socket:clientSocket.intValue];
+                       }
+                   } else if (recv_length == 0) {
+                       SERVER_LOG("Client disconnected\n");
+                       [self closeClient:clientSocket];
+                   } else {
+                       SERVER_LOG("receive data error: %s\n", strerror(errno));
+                   }
         }
     }
     //关闭与客户端的连接

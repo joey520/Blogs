@@ -124,41 +124,43 @@
 
 - (void)run {
     while (_server_socket_fd != INVALID_SOCKET && !_isClosed) {
-        //尝试accept，此时我们不关注client的地址，只保存client
-        int client_socket_fd = accept(_server_socket_fd, NULL, NULL);
-        if (client_socket_fd != INVALID_SOCKET) {
-            fd_set error_set;
-            FD_ZERO(&error_set);
-            FD_SET(_server_socket_fd, &error_set);
+        @autoreleasepool {
+            //尝试accept，此时我们不关注client的地址，只保存client
+            int client_socket_fd = accept(_server_socket_fd, NULL, NULL);
+            if (client_socket_fd != INVALID_SOCKET) {
+                fd_set error_set;
+                FD_ZERO(&error_set);
+                FD_SET(_server_socket_fd, &error_set);
 
-            struct timeval tm;
-            tm.tv_sec = 2;
-            tm.tv_usec = 0;
-            //由于是非阻塞,使用select来查看文件描述符的变化
-            int ret = select(client_socket_fd + 1, NULL, NULL, &error_set, &tm);
-            //如果文件描述符有变化
-            if (ret > 0) {
-                //如果client有errno
-                if (FD_ISSET(client_socket_fd, &error_set)) {
+                struct timeval tm;
+                tm.tv_sec = 2;
+                tm.tv_usec = 0;
+                //由于是非阻塞,使用select来查看文件描述符的变化
+                int ret = select(client_socket_fd + 1, NULL, NULL, &error_set, &tm);
+                //如果文件描述符有变化
+                if (ret > 0) {
+                    //如果client有errno
+                    if (FD_ISSET(client_socket_fd, &error_set)) {
+                        SERVER1_LOG("client error: %s", strerror(errno));
+                        close(client_socket_fd);
+                    }
+                }
+                //错误误
+                else if (ret < 0) {
                     SERVER1_LOG("client error: %s", strerror(errno));
                     close(client_socket_fd);
+
                 }
-            }
-            //错误误
-            else if (ret < 0) {
-                SERVER1_LOG("client error: %s", strerror(errno));
-                close(client_socket_fd);
+                //连接成功
+                else {
+                    pthread_mutex_lock(&_lock);
+                    [_connectedClients addObject:@(client_socket_fd)];
+                    NSArray *tempArray = _connectedClients.copy;
+                    pthread_mutex_unlock(&_lock);
 
-            }
-            //连接成功
-            else {
-                pthread_mutex_lock(&_lock);
-                [_connectedClients addObject:@(client_socket_fd)];
-                NSArray *tempArray = _connectedClients.copy;
-                pthread_mutex_unlock(&_lock);
-
-                if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didUpdateConnectedClients:)]) {
-                    [self.delegtate server:self didUpdateConnectedClients:tempArray];
+                    if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didUpdateConnectedClients:)]) {
+                        [self.delegtate server:self didUpdateConnectedClients:tempArray];
+                    }
                 }
             }
         }
@@ -187,56 +189,58 @@
 - (void)startRecv {
     //当有连接的client时，尝试recv
     while (self.isRunning && _server_socket_fd != INVALID_SOCKET) {
-        pthread_mutex_lock(&_lock);
-        NSArray *tempArray = _connectedClients.copy;
-        pthread_mutex_unlock(&_lock);
-        for (NSNumber *clientValue in tempArray) {
-            int tmp_cilent_socket_fd = clientValue.intValue;
-            fd_set read_set;
-            FD_ZERO(&read_set);
-            FD_SET(tmp_cilent_socket_fd, &read_set);
+        @autoreleasepool {
+            pthread_mutex_lock(&_lock);
+            NSArray *tempArray = _connectedClients.copy;
+            pthread_mutex_unlock(&_lock);
+            for (NSNumber *clientValue in tempArray) {
+                int tmp_cilent_socket_fd = clientValue.intValue;
+                fd_set read_set;
+                FD_ZERO(&read_set);
+                FD_SET(tmp_cilent_socket_fd, &read_set);
 
-            struct timeval tm;
-            tm.tv_sec = 1;
-            tm.tv_usec = 0;
+                struct timeval tm;
+                tm.tv_sec = 1;
+                tm.tv_usec = 0;
 
-            int ret = select(tmp_cilent_socket_fd + 1, &read_set, NULL, NULL, &tm);
-            //如果文件有可读
-            if (ret > 0) {
-                //如果发现文件描述符可读
-                if (FD_ISSET(tmp_cilent_socket_fd, &read_set)) {
-                    char buffer[MAX_BUFFER_SIZE] = { 0 };
-                    int recv_size = (int)recv(tmp_cilent_socket_fd, buffer, MAX_BUFFER_SIZE, 0);
-                    SERVER1_LOG("recv data from socket: %d, length: %d, msg: %s", tmp_cilent_socket_fd, recv_size, buffer);
-                    //如果正确收到了数据
-                    if (recv_size > 0) {
-                        if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didReceiveBuffer:length:socket:)]) {
-                            [self.delegtate server:self didReceiveBuffer:buffer length:recv_size socket:tmp_cilent_socket_fd];
+                int ret = select(tmp_cilent_socket_fd + 1, &read_set, NULL, NULL, &tm);
+                //如果文件有可读
+                if (ret > 0) {
+                    //如果发现文件描述符可读
+                    if (FD_ISSET(tmp_cilent_socket_fd, &read_set)) {
+                        char buffer[MAX_BUFFER_SIZE] = { 0 };
+                        int recv_size = (int)recv(tmp_cilent_socket_fd, buffer, MAX_BUFFER_SIZE, 0);
+                        SERVER1_LOG("recv data from socket: %d, length: %d, msg: %s", tmp_cilent_socket_fd, recv_size, buffer);
+                        //如果正确收到了数据
+                        if (recv_size > 0) {
+                            if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didReceiveBuffer:length:socket:)]) {
+                                [self.delegtate server:self didReceiveBuffer:buffer length:recv_size socket:tmp_cilent_socket_fd];
+                            }
                         }
-                    }
-                    //说明客户端已经关闭
-                    else if (recv_size == 0) {
-                        SERVER1_LOG("client: %d, has closed", tmp_cilent_socket_fd);
-                        close(tmp_cilent_socket_fd);
-                        [_connectedClients removeObject:clientValue];
-                        if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didUpdateConnectedClients:)]) {
-                            [self.delegtate server:self didUpdateConnectedClients:_connectedClients.copy];
+                        //说明客户端已经关闭
+                        else if (recv_size == 0) {
+                            SERVER1_LOG("client: %d, has closed", tmp_cilent_socket_fd);
+                            close(tmp_cilent_socket_fd);
+                            [_connectedClients removeObject:clientValue];
+                            if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didUpdateConnectedClients:)]) {
+                                [self.delegtate server:self didUpdateConnectedClients:_connectedClients.copy];
+                            }
                         }
                     }
                 }
-            }
-            //如果有问题
-            else if (ret < 0) {
-                close(tmp_cilent_socket_fd);
-                pthread_mutex_lock(&_lock);
-                [_connectedClients removeObject:clientValue];
-                NSArray *tempArray = _connectedClients.copy;
-                pthread_mutex_unlock(&_lock);
+                //如果有问题
+                else if (ret < 0) {
+                    close(tmp_cilent_socket_fd);
+                    pthread_mutex_lock(&_lock);
+                    [_connectedClients removeObject:clientValue];
+                    NSArray *tempArray = _connectedClients.copy;
+                    pthread_mutex_unlock(&_lock);
 
-                if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didUpdateConnectedClients:)]) {
-                    [self.delegtate server:self didUpdateConnectedClients:tempArray];
+                    if (self.delegtate && [self.delegtate respondsToSelector:@selector(server:didUpdateConnectedClients:)]) {
+                        [self.delegtate server:self didUpdateConnectedClients:tempArray];
+                    }
+                    SERVER1_LOG("client: %d select errno: %s, close it", tmp_cilent_socket_fd, strerror(errno));
                 }
-                SERVER1_LOG("client: %d select errno: %s, close it", tmp_cilent_socket_fd, strerror(errno));
             }
         }
     }

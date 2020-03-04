@@ -29,7 +29,7 @@ static SignalHandler preSignalHandler;
     int a = 5;
     int b = func(a);
     
-    [self testSystemCall];
+    [self testSigsuspend];
 }
 
 - (void)testSystemCall {
@@ -94,7 +94,7 @@ static void signalHandler(int signalv) {
     printf("new set is %8.8d, old set is:%8.8d\n", new_set, old_set);
     sigpending(&pending_set);
     printf("Pending set is %8.8d.\n", pending_set);
-//    kill(getpid(), SIGINT);
+    kill(getpid(), SIGINT);
     sigpending(&pending_set);
     printf("Pending set is %8.8d.\n", pending_set);
     kill(getpid(), SIGQUIT);
@@ -104,7 +104,7 @@ static void signalHandler(int signalv) {
     sigpending(&pending_set);
     printf("Pending set is %8.8d.\n", pending_set);
     //阻塞
-    sigprocmask( SIG_UNBLOCK, &new_set, &old_set );
+//    sigprocmask( SIG_UNBLOCK, &new_set, &old_set );
     if (sigismember(&pending_set, SIGINT)) {
         printf("SIGINT was came.\n");
     }
@@ -201,6 +201,54 @@ static void oldActionHandler(int signo, struct __siginfo *siginfo, void *context
     }
     //发送信号
     alarm(1);
+}
+
+sigjmp_buf jmp;
+- (void)testSigsetjmp {
+    sigset_t set;
+    sigemptyset(&set);
+    sigaddset(&set, SIGALRM);
+    int a = 20;
+    int ret = sigsetjmp(jmp, 0);
+    printf("ret: %d\n", ret);
+    if (ret < 0) {
+        printf("sig set jmp failed: %s", strerror(errno));
+    } else if(ret > 0) {
+        printf("after jmp: a: %d\n", a);
+        return;
+    }
+
+    printf("before jmp: a: %d\n", a);
+    [self changeNum:a];
+}
+
+- (void)changeNum:(int)num {
+    num = 30;
+    NSLog(@"jmp\n");
+    siglongjmp(jmp, 2);
+}
+
+- (void)testSigsuspend {
+    signal(SIGALRM, signalHandler);
+    sigset_t set;
+    sigemptyset(&set);
+    sigaddset(&set, SIGALRM);
+    [NSThread detachNewThreadWithBlock:^{
+        printf("an other thread signal \n");
+        alarm(1);
+    }];
+    printf("start suspend, will \n");
+    printf("pause returned: %d\n, errno: %d\n", pause(), errno);
+//    int ret = sigsuspend(&set);
+//    if (ret < 0) {
+//        printf("sigsuspend failed: %s\n", strerror(errno));
+//    }
+    
+    printf("run here 1\n");
+    
+    alarm(1);
+    
+    printf("after signal\n");
 }
 
 @end
