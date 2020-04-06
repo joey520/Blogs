@@ -1,0 +1,448 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5146152E2438C76E00AD3C44 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5146152D2438C76E00AD3C44 /* AppDelegate.m */; };
+		514615312438C76E00AD3C44 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 514615302438C76E00AD3C44 /* SceneDelegate.m */; };
+		514615342438C76E00AD3C44 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 514615332438C76E00AD3C44 /* ViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		514615372438C76E00AD3C44 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 514615352438C76E00AD3C44 /* Main.storyboard */; };
+		514615392438C77000AD3C44 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 514615382438C77000AD3C44 /* Assets.xcassets */; };
+		5146153C2438C77000AD3C44 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5146153A2438C77000AD3C44 /* LaunchScreen.storyboard */; };
+		5146153F2438C77000AD3C44 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5146153E2438C77000AD3C44 /* main.m */; };
+		51DEB497243A05760055D034 /* TestJSCore.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DEB496243A05760055D034 /* TestJSCore.m */; };
+		51DEB49C243A06850055D034 /* JPEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DEB499243A06840055D034 /* JPEngine.m */; };
+		51DEB49D243A06850055D034 /* JSPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 51DEB49B243A06840055D034 /* JSPatch.js */; };
+		51DEB4A0243A077A0055D034 /* TestJSCore.js in Resources */ = {isa = PBXBuildFile; fileRef = 51DEB49F243A07790055D034 /* TestJSCore.js */; };
+		51DEB4A4243A2EAC0055D034 /* TestYacc.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DEB4A3243A2EAC0055D034 /* TestYacc.m */; };
+		51DEB4B2243A35960055D034 /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 51DEB4AF243A35960055D034 /* libffi.a */; };
+		51DEB4B5243A35AF0055D034 /* TestLibffi.m in Sources */ = {isa = PBXBuildFile; fileRef = 51DEB4B4243A35AF0055D034 /* TestLibffi.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		514615292438C76E00AD3C44 /* LibffiDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LibffiDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5146152C2438C76E00AD3C44 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		5146152D2438C76E00AD3C44 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		5146152F2438C76E00AD3C44 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		514615302438C76E00AD3C44 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		514615322438C76E00AD3C44 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		514615332438C76E00AD3C44 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		514615362438C76E00AD3C44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		514615382438C77000AD3C44 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5146153B2438C77000AD3C44 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		5146153D2438C77000AD3C44 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5146153E2438C77000AD3C44 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		51DEB495243A05760055D034 /* TestJSCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestJSCore.h; sourceTree = "<group>"; };
+		51DEB496243A05760055D034 /* TestJSCore.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestJSCore.m; sourceTree = "<group>"; };
+		51DEB499243A06840055D034 /* JPEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JPEngine.m; sourceTree = "<group>"; };
+		51DEB49A243A06840055D034 /* JPEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPEngine.h; sourceTree = "<group>"; };
+		51DEB49B243A06840055D034 /* JSPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = JSPatch.js; sourceTree = "<group>"; };
+		51DEB49F243A07790055D034 /* TestJSCore.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TestJSCore.js; sourceTree = "<group>"; };
+		51DEB4A2243A2EAC0055D034 /* TestYacc.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestYacc.h; sourceTree = "<group>"; };
+		51DEB4A3243A2EAC0055D034 /* TestYacc.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestYacc.m; sourceTree = "<group>"; };
+		51DEB4A7243A35960055D034 /* ffitarget_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm64.h; sourceTree = "<group>"; };
+		51DEB4A8243A35960055D034 /* ffitarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget.h; sourceTree = "<group>"; };
+		51DEB4A9243A35960055D034 /* ffi_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm.h; sourceTree = "<group>"; };
+		51DEB4AA243A35960055D034 /* ffi_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_i386.h; sourceTree = "<group>"; };
+		51DEB4AB243A35960055D034 /* ffitarget_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_x86_64.h; sourceTree = "<group>"; };
+		51DEB4AC243A35960055D034 /* ffi_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_x86_64.h; sourceTree = "<group>"; };
+		51DEB4AD243A35960055D034 /* ffitarget_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm.h; sourceTree = "<group>"; };
+		51DEB4AE243A35960055D034 /* ffitarget_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_i386.h; sourceTree = "<group>"; };
+		51DEB4AF243A35960055D034 /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
+		51DEB4B0243A35960055D034 /* ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
+		51DEB4B1243A35960055D034 /* ffi_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm64.h; sourceTree = "<group>"; };
+		51DEB4B3243A35AF0055D034 /* TestLibffi.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestLibffi.h; sourceTree = "<group>"; };
+		51DEB4B4243A35AF0055D034 /* TestLibffi.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestLibffi.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		514615262438C76E00AD3C44 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51DEB4B2243A35960055D034 /* libffi.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		514615202438C76E00AD3C44 = {
+			isa = PBXGroup;
+			children = (
+				5146152B2438C76E00AD3C44 /* LibffiDemo */,
+				5146152A2438C76E00AD3C44 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		5146152A2438C76E00AD3C44 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				514615292438C76E00AD3C44 /* LibffiDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5146152B2438C76E00AD3C44 /* LibffiDemo */ = {
+			isa = PBXGroup;
+			children = (
+				51DEB4A5243A35720055D034 /* TestLibffi */,
+				51DEB4A1243A2E9E0055D034 /* MangoFixDemo */,
+				51DEB49E243A068A0055D034 /* JSPatchDemo */,
+				5146152C2438C76E00AD3C44 /* AppDelegate.h */,
+				5146152D2438C76E00AD3C44 /* AppDelegate.m */,
+				5146152F2438C76E00AD3C44 /* SceneDelegate.h */,
+				514615302438C76E00AD3C44 /* SceneDelegate.m */,
+				514615322438C76E00AD3C44 /* ViewController.h */,
+				514615332438C76E00AD3C44 /* ViewController.m */,
+				514615352438C76E00AD3C44 /* Main.storyboard */,
+				514615382438C77000AD3C44 /* Assets.xcassets */,
+				5146153A2438C77000AD3C44 /* LaunchScreen.storyboard */,
+				5146153D2438C77000AD3C44 /* Info.plist */,
+				5146153E2438C77000AD3C44 /* main.m */,
+			);
+			path = LibffiDemo;
+			sourceTree = "<group>";
+		};
+		51DEB498243A06840055D034 /* JSEngine */ = {
+			isa = PBXGroup;
+			children = (
+				51DEB499243A06840055D034 /* JPEngine.m */,
+				51DEB49A243A06840055D034 /* JPEngine.h */,
+				51DEB49B243A06840055D034 /* JSPatch.js */,
+			);
+			path = JSEngine;
+			sourceTree = "<group>";
+		};
+		51DEB49E243A068A0055D034 /* JSPatchDemo */ = {
+			isa = PBXGroup;
+			children = (
+				51DEB49F243A07790055D034 /* TestJSCore.js */,
+				51DEB495243A05760055D034 /* TestJSCore.h */,
+				51DEB496243A05760055D034 /* TestJSCore.m */,
+				51DEB498243A06840055D034 /* JSEngine */,
+			);
+			path = JSPatchDemo;
+			sourceTree = "<group>";
+		};
+		51DEB4A1243A2E9E0055D034 /* MangoFixDemo */ = {
+			isa = PBXGroup;
+			children = (
+				51DEB4A2243A2EAC0055D034 /* TestYacc.h */,
+				51DEB4A3243A2EAC0055D034 /* TestYacc.m */,
+			);
+			path = MangoFixDemo;
+			sourceTree = "<group>";
+		};
+		51DEB4A5243A35720055D034 /* TestLibffi */ = {
+			isa = PBXGroup;
+			children = (
+				51DEB4B3243A35AF0055D034 /* TestLibffi.h */,
+				51DEB4B4243A35AF0055D034 /* TestLibffi.m */,
+				51DEB4A6243A35960055D034 /* libffi */,
+			);
+			path = TestLibffi;
+			sourceTree = "<group>";
+		};
+		51DEB4A6243A35960055D034 /* libffi */ = {
+			isa = PBXGroup;
+			children = (
+				51DEB4A7243A35960055D034 /* ffitarget_arm64.h */,
+				51DEB4A8243A35960055D034 /* ffitarget.h */,
+				51DEB4A9243A35960055D034 /* ffi_arm.h */,
+				51DEB4AA243A35960055D034 /* ffi_i386.h */,
+				51DEB4AB243A35960055D034 /* ffitarget_x86_64.h */,
+				51DEB4AC243A35960055D034 /* ffi_x86_64.h */,
+				51DEB4AD243A35960055D034 /* ffitarget_arm.h */,
+				51DEB4AE243A35960055D034 /* ffitarget_i386.h */,
+				51DEB4AF243A35960055D034 /* libffi.a */,
+				51DEB4B0243A35960055D034 /* ffi.h */,
+				51DEB4B1243A35960055D034 /* ffi_arm64.h */,
+			);
+			path = libffi;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		514615282438C76E00AD3C44 /* LibffiDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 514615422438C77000AD3C44 /* Build configuration list for PBXNativeTarget "LibffiDemo" */;
+			buildPhases = (
+				514615252438C76E00AD3C44 /* Sources */,
+				514615262438C76E00AD3C44 /* Frameworks */,
+				514615272438C76E00AD3C44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LibffiDemo;
+			productName = LibffiDemo;
+			productReference = 514615292438C76E00AD3C44 /* LibffiDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		514615212438C76E00AD3C44 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "joey cao";
+				TargetAttributes = {
+					514615282438C76E00AD3C44 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 514615242438C76E00AD3C44 /* Build configuration list for PBXProject "LibffiDemo" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 514615202438C76E00AD3C44;
+			productRefGroup = 5146152A2438C76E00AD3C44 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				514615282438C76E00AD3C44 /* LibffiDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		514615272438C76E00AD3C44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5146153C2438C77000AD3C44 /* LaunchScreen.storyboard in Resources */,
+				51DEB4A0243A077A0055D034 /* TestJSCore.js in Resources */,
+				514615392438C77000AD3C44 /* Assets.xcassets in Resources */,
+				51DEB49D243A06850055D034 /* JSPatch.js in Resources */,
+				514615372438C76E00AD3C44 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		514615252438C76E00AD3C44 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				51DEB49C243A06850055D034 /* JPEngine.m in Sources */,
+				514615342438C76E00AD3C44 /* ViewController.m in Sources */,
+				5146152E2438C76E00AD3C44 /* AppDelegate.m in Sources */,
+				51DEB4B5243A35AF0055D034 /* TestLibffi.m in Sources */,
+				5146153F2438C77000AD3C44 /* main.m in Sources */,
+				51DEB4A4243A2EAC0055D034 /* TestYacc.m in Sources */,
+				514615312438C76E00AD3C44 /* SceneDelegate.m in Sources */,
+				51DEB497243A05760055D034 /* TestJSCore.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		514615352438C76E00AD3C44 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				514615362438C76E00AD3C44 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		5146153A2438C77000AD3C44 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5146153B2438C77000AD3C44 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		514615402438C77000AD3C44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		514615412438C77000AD3C44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		514615432438C77000AD3C44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LibffiDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibffiDemo/libffi/libffi",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.joey.MyTest.LibffiDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		514615442438C77000AD3C44 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = LibffiDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/LibffiDemo/libffi/libffi",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.joey.MyTest.LibffiDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		514615242438C76E00AD3C44 /* Build configuration list for PBXProject "LibffiDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				514615402438C77000AD3C44 /* Debug */,
+				514615412438C77000AD3C44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		514615422438C77000AD3C44 /* Build configuration list for PBXNativeTarget "LibffiDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				514615432438C77000AD3C44 /* Debug */,
+				514615442438C77000AD3C44 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 514615212438C76E00AD3C44 /* Project object */;
+}
